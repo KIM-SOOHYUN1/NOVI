@@ -1,46 +1,45 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Novi: AI 뉴스 요약/검색 서비스
 
-## Available Scripts
+Novi는 네이버/구글 뉴스 API를 활용해 최신 뉴스를 한 번에 검색하고, AI 기반 요약 및 가독성 높은 카드 UI로 보여주는 오픈소스 프로젝트입니다.
 
-In the project directory, you can run:
+## 주요 기능
+- 키워드/프롬프트 기반 뉴스 통합 검색 (네이버/구글)
+- 오늘 날짜 뉴스만 필터링, 기사 등록일시 표시
+- 뉴스 카드 UI, 더보기, 출처/언론사/기사 바로가기 제공
+- HTML 태그 제거, 가독성 개선, 반응형 디자인
 
-### `npm start`
+## 기술 스택
+- 프론트엔드: React + TypeScript + Tailwind CSS
+- 백엔드: Python Flask (API 서버)
+- 크롤러: 네이버 오픈API, 구글 Custom Search API
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 설치 및 실행
+### 1. 프론트엔드
+```
+npm install
+npm start
+```
+접속: http://localhost:3000
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### 2. 백엔드(API 서버)
+```
+pip install -r requirements.txt
+python news_api.py
+```
+접속: http://localhost:5000
 
-### `npm test`
+## API 구조
+- `/api/search?q=검색어` : 네이버/구글 뉴스 동시 조회 및 통합 결과 반환 (JSON)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 환경 변수 예시
+- NAVER_CLIENT_ID, NAVER_CLIENT_SECRET
+- GOOGLE_API_KEY, GOOGLE_CSE_ID
 
-### `npm run build`
+## 폴더 구조
+- src/ : React 프론트엔드
+- naver_news_crawler.py, google_news_crawler.py : 뉴스 크롤러
+- news_api.py : Flask API 서버
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 기여 및 문의
+이슈/PR 환영합니다! (by KIM-SOOHYUN1)
