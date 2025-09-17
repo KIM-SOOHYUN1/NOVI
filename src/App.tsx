@@ -37,17 +37,26 @@ const mockNews: NewsItem[] = [
 ];
 
 
+
 function App() {
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<NewsItem[]>([]);
   const [visibleCount, setVisibleCount] = useState(5);
+  const [loading, setLoading] = useState(false);
 
   const handleSearch = async () => {
     if (!query.trim()) return;
-    const res = await fetch(`http://localhost:5000/api/search?q=${encodeURIComponent(query)}`);
-    const data = await res.json();
-    setResults(data);
-    setVisibleCount(5);
+    setLoading(true);
+    try {
+      const res = await fetch(`http://localhost:5000/api/search?q=${encodeURIComponent(query)}`);
+      const data = await res.json();
+      setResults(data);
+      setVisibleCount(5);
+    } catch (e) {
+      setResults([]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handleShowMore = () => {
@@ -75,7 +84,12 @@ function App() {
         </button>
       </div>
       <div className="w-full max-w-xl">
-        {results.length === 0 ? (
+        {loading ? (
+          <div className="flex flex-col items-center justify-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-blue-500 border-opacity-30 border-t-blue-600 mb-4"></div>
+            <div className="text-blue-500 font-semibold mt-2">검색 중입니다...</div>
+          </div>
+        ) : results.length === 0 ? (
           <div className="text-gray-400 text-center">검색 결과가 없습니다.</div>
         ) : (
           <>
